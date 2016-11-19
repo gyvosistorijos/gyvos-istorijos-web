@@ -70,9 +70,9 @@ namespace Hintme.Controllers
         [Route("Istorijos/{id}")]
         public ActionResult Stories(string id)
         {
-            id = id.Replace('.', ' ');
+            id = id.Replace(".", "");
             var stories =
-               _repository.GetHints().Where(x => (x.Header ?? "").ToLowerInvariant() == id.ToLowerInvariant());
+               _repository.GetHints().Where(x => (x.Header ?? "").Replace(" ","").Equals(id.ToLowerInvariant(),StringComparison.OrdinalIgnoreCase));
 
             return View(stories.ToArray());
         }
