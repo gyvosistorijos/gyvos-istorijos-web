@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Gyvos istorijos - pasidalink savo istorija!</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/freelancer/freelancer.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Merriweather', serif;
+        }
+
+        h1, h4 {
+            font-family: 'Merriweather', serif;
+        }
+
+        #map {
+            height: 480px;
+        }
+
+        .pac-controls {
+            margin-top: 10px;
+            border: 1px solid transparent;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 32px;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+          }
+
+          #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 300px;
+          }
+
+          #pac-input:focus {
+            border-color: #4d90fe;
+          }
+
+          .pac-container {
+            font-family: Roboto;
+          }
+
+          #type-selector {
+            color: #fff;
+            background-color: #4d90fe;
+            padding: 5px 11px 0px 11px;
+          }
+
+          #type-selector label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+          }
+          #target {
+            width: 345px;
+          }
+
+    </style>
+</head>
+<body style="background: #F9F6E4">
+<div class="container">
+    
+    <a href="https://www.facebook.com/istorijosgyvos/"><img src="icon.png" class="center-block" height="320px" /></a>
+    <h1 class="text-center">Gyvos Istorijos</h1>
+
+    <div class="row">
+        <form id="inputForm" method="post" enctype="multipart/form-data">
+            <p class="text-center">Pasidalink istoriniu nutikimu. Tavo istoriją programėlėje „Gyvos Istorijos“ galės rasti ir skaityti visi.</p>
+            
+            <br/>
+
+            <h4>Kur tai nutiko?</h4>
+            <p class="text-muted">Kurioje vietoje?</p>
+            <input id="pac-input" class="pac-controls" type="text" placeholder="Paieška" onkeypress="return event.keyCode != 13;">
+            <div id="map"></div>
+            
+            <br/>
+
+            <h4>Kas čia nutiko?</h4>
+            <p class="text-muted">Pasidalink istorija ar nutikimu, nutikusiu šioje vietoje ir turinčiu bent vieną veikėją. Gali naudoti tiek simbolių, kiek Vilniui metų.</p>
+            <div class="row control-group" style="background: #FFF; padding: 32px;">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label>Tekstas</label>
+                    <textarea class="form-control" id="text" placeholder="Tekstas" name="text" type="text" maxlength="693" rows="5"></textarea>
+                    <h6 class="pull-right" id="count_message"></h6>
+                </div>
+            </div>
+            
+            <br/>
+
+            <h4>Kaip tai atrodė?</h4>
+            <p class="text-muted">Nuotrauka, paveikslėlis yra pageidaujamas, bet neprivalomas.</p>
+            <div class="row control-group" style="background: #FFF; padding: 32px;">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <input id="picture" type="file" name="Picture" />
+                </div>
+            </div>
+            <input placeholder="Platuma" name="latitude" type="hidden" id="latitude"/>
+            <input placeholder="Ilguma" name="longitude" type="hidden" id="longitude"/>
+
+            <br/>
+            
+            <h4>Kas tai užrašė?</h4>
+            <p class="text-muted">Gali pasirašyti vardu ar slapyvardžiu.</p>
+            <div class="row control-group" style="background: #FFF; padding: 32px;">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label>Autorius</label>
+                    <input class="form-control" name="header" placeholder="Autorius" type="text" onkeypress="return event.keyCode != 13;"/>
+                </div>
+            </div>
+
+            <br/>
+            
+            <div class="row control-group text-center" style="margin-bottom: 64px">
+                <input type="submit" value="Pasidalink nutikimu" class="btn btn-success btn-lg" style="padding: 16px;"/>
+            </div>
+        </form>
+    </div>
+</div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/freelancer/js/freelancer.min.js"></script>
+    <script src="~/map.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBP22gn4dkeGZCejxMGXBdMHMopGSX_pA8&callback=initMap&libraries=places"
+            async defer></script>
+</body>
+</html>

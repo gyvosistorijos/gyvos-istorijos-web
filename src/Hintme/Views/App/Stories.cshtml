@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Hintme.Models.Hint>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Gyvos istorijos - pasidalink savo istorija!</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/freelancer/freelancer.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Merriweather', serif;
+        }
+
+        h1, h4 {
+            font-family: 'Merriweather', serif;
+        }
+
+        #map {
+            height: 480px;
+        }
+    </style>
+</head>
+<body style="background: #F9F6E4">
+<div class="container">
+    
+
+    <a href="https://www.facebook.com/istorijosgyvos/"><img src="~/icon.png" class="center-block" height="320px" /></a>
+    <h1 class="text-center">Gyvos Istorijos</h1>
+    <h2 class="text-center">Tavo istorijos</h2>
+    <br />
+    <br />
+    <a href="~/"><div class="row btn btn-success col-md-offset-4 col-md-4">Pridėti daugiau istorijų</div></a>
+    <br/>
+    <br />
+    <br />
+    <br />
+    @foreach (var story in Model)
+    {
+        <div class="row">
+            <div>
+                Istorija: @story.Text
+            </div>
+            <div>
+                Koordinatės: @story.Latitude , @story.Longitude
+            </div>
+            <div>
+                Paveikslėlio url: @story.Url
+            </div>
+            <br/>
+        </div>
+    }
+
+</div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/freelancer/js/freelancer.min.js"></script>
+</body>
+</html>
