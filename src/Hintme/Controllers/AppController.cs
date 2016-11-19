@@ -8,6 +8,7 @@ using Hintme.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -66,7 +67,7 @@ namespace Hintme.Controllers
             return _config["AzureBlobStorage:Url"] + _config["AzureBlobStorage:Container"] + "/"+ fileName;
         }
 
-
+        [Route("Istorijos/{id}")]
         public ActionResult Stories(string id)
         {
             id = id.Replace('.', ' ');
