@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Hintme.Models.Hint>
+﻿@model Hintme.Models.Hint[]
 
 <!DOCTYPE html>
 
@@ -21,7 +21,10 @@
         }
 
         #map {
-            height: 480px;
+            height: 700px;
+        }
+        .infowindow_image {
+            height: 300px;
         }
     </style>
 </head>
@@ -40,25 +43,40 @@
     <br />
     <br />
     <br />
-    @foreach (var story in Model)
-    {
-        <div class="row">
-            <div>
-                Istorija: @story.Text
-            </div>
-            <div>
-                Koordinatės: @story.Latitude , @story.Longitude
-            </div>
-            <div>
-                Paveikslėlio url: @story.Url
-            </div>
-            <br />
-        </div>
-    }
-
+    <div id="map"></div>
+    <br/>
+    <br />
+    <br />
+    <br />
+    <br />
 </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/freelancer/js/freelancer.min.js"></script>
+    <script>
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"),
+               {
+                   center: { lat: 54.6872, lng: 25.2797 },
+                   zoom: 13,
+                   clickableIcons: false
+               });
+
+            var infoWindows = [];
+
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                var url = string.IsNullOrEmpty(Model[i].Url) ? "": "<img src=\"" + Model[i].Url + "\" class=\"infowindow_image\"/>";
+
+                @Html.Raw($"infoWindows.push(new google.maps.InfoWindow({{content: '<p>{Model[i].Text}</p>{url}'}}));")
+
+
+                @Html.Raw($"var marker{i} = new google.maps.Marker({{position: {{ lat: {Model[i].Latitude.ToString().Replace(',','.')}, lng: {Model[i].Longitude.ToString().Replace(',', '.')} }},map: map,title: 'Hello World!'}});")
+                @Html.Raw($"marker{i}.addListener('click', function() {{for (i = 0; i < infoWindows.length; i++) {{infoWindows[i].close();}}; infoWindows[{i}].open(map, marker{i});}});")
+                @Html.Raw($"marker{i}.setMap(map);")
+            }
+        }
+    </script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBP22gn4dkeGZCejxMGXBdMHMopGSX_pA8&callback=initMap&libraries=places"></script>
 </body>
 </html>

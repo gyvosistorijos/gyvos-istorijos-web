@@ -74,7 +74,7 @@ namespace Hintme.Controllers
             var stories =
                _repository.GetHints().Where(x => (x.Header ?? "").ToLowerInvariant() == id.ToLowerInvariant());
 
-            return View(stories);
+            return View(stories.ToArray());
         }
     }
 }
