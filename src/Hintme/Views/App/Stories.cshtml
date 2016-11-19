@@ -68,7 +68,7 @@
             {
                 var url = string.IsNullOrEmpty(Model[i].Url) ? "": "<img src=\"" + Model[i].Url + "\" class=\"infowindow_image\"/>";
 
-                @Html.Raw($"infoWindows.push(new google.maps.InfoWindow({{content: '<p>{Model[i].Text.Replace("\n", "<br />")}</p>{url}'}}));")
+                @Html.Raw($"infoWindows.push(new google.maps.InfoWindow({{content: '<p>{Model[i].Text.Replace("\r\n", "<br />").Replace("\n", "<br />")}</p>{url}'}}));")
 
 
                 @Html.Raw($"var marker{i} = new google.maps.Marker({{position: {{ lat: {Model[i].Latitude.ToString().Replace(',','.')}, lng: {Model[i].Longitude.ToString().Replace(',', '.')} }},map: map,title: 'Hello World!'}});")

@@ -76,5 +76,11 @@ namespace Hintme.Controllers
 
             return View(stories.ToArray());
         }
+
+        [Route("Istorijos")]
+        public ActionResult Stories()
+        {
+            return View(_repository.GetHints().ToArray());
+        }
     }
 }
