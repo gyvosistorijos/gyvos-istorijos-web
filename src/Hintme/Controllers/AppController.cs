@@ -49,8 +49,6 @@ namespace Hintme.Controllers
                 Url = url
             });
 
-           await _repository.SaveContextAsync();
-
             return RedirectToAction("Stories", new { id = hint.Header.Replace(' ','.')});
         }
 

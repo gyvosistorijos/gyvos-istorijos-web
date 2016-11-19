@@ -24,10 +24,9 @@ namespace Hintme.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody]Hint hint)
+        public IActionResult Post([FromBody]Hint hint)
         {
             _repository.SaveHint(hint);
-            await _repository.SaveContextAsync();
 
             return Ok(hint);
         }

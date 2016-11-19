@@ -10,6 +10,5 @@ namespace Hintme.Models
     {
         IEnumerable<Hint> GetHints();
         void SaveHint(Hint hint);
-        Task<bool> SaveContextAsync();
     }
 }
