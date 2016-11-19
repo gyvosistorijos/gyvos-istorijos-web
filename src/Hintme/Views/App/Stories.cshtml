@@ -70,8 +70,9 @@
 
                 @Html.Raw($"infoWindows.push(new google.maps.InfoWindow({{content: '<p>{Model[i].Text.Replace("\r\n", "<br />").Replace("\n", "<br />")}</p>{url}'}}));")
 
+                var title = Model[i].Text.Length >= 15 ? Model[i].Text.Substring(0, 15) + "..." : Model[i].Text;
 
-                @Html.Raw($"var marker{i} = new google.maps.Marker({{position: {{ lat: {Model[i].Latitude.ToString().Replace(',','.')}, lng: {Model[i].Longitude.ToString().Replace(',', '.')} }},map: map,title: 'Hello World!'}});")
+                @Html.Raw($"var marker{i} = new google.maps.Marker({{position: {{ lat: {Model[i].Latitude.ToString().Replace(',','.')}, lng: {Model[i].Longitude.ToString().Replace(',', '.')} }},map: map,title: '{title}'}});")
                 @Html.Raw($"marker{i}.addListener('click', function() {{for (i = 0; i < infoWindows.length; i++) {{infoWindows[i].close();}}; infoWindows[{i}].open(map, marker{i});}});")
                 @Html.Raw($"marker{i}.setMap(map);")
             }
